@@ -65,8 +65,7 @@ while j>0:
 	    'psi':   np.pi/4,
 	    'gmst0': 0,
 	    'Heff5': 1,
-	    'Heff8': 15,
-	    'e0': 0.1
+	    'Heff8': 15
 	    }
 	#calculating isco frequency
 
