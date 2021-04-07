@@ -24,7 +24,7 @@ from gwbench import network
 ############################################################################
 
 # choose the desired detectors
-network_spec = ['CE2-40-CBO_C', 'CE2-40-CBO_N', 'CE2-40-CBO_S']
+network_spec = ['aLIGO_H', 'aLIGO_L', 'aLIGO_V']
 # initialize the network with the desired detectors
 net = network.Network(network_spec)
 
@@ -41,6 +41,7 @@ err_Log_Mc = []
 err_H_eff5 = []
 err_H_eff8 = []
 chi_val =[]
+err_e0 =[]
 #input m1, m2 instead of Mc eta and then convert
 m1 = 25.
 m2 = 2.
@@ -66,7 +67,7 @@ while j>0:
 	    'gmst0': 0,
 	    'Heff5': 1,
 	    'Heff8': 15,
-	    'e0': 0.1
+	    'e0': 0.01
 	    }
 	#calculating isco frequency
 
@@ -78,7 +79,7 @@ while j>0:
 
 
 	#check the desired frequency range
-	f = np.arange(4.,f_isco,2**-4)
+	f = np.arange(10.,f_isco,2**-4)
 
 
 
@@ -142,6 +143,7 @@ while j>0:
 	err_H_eff5.append(net.errs["Heff5"])
 	err_H_eff8.append(net.errs["Heff8"])
 	chi_val.append(chi)
+	err_e0.append(net.errs["e0"])
 	
 	#print injection values of masses and spins
 	chi1,chi2 = inj_params["chi1z"],inj_params["chi2z"]
