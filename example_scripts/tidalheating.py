@@ -24,7 +24,7 @@ from gwbench import network
 ############################################################################
 
 # choose the desired detectors
-network_spec = ['CE2-40-CBO_C', 'CE2-40-CBO_N', 'CE2-40-CBO_S']
+network_spec = ['aLIGO_H', 'aLIGO_L', 'aLIGO_V']
 # initialize the network with the desired detectors
 net = network.Network(network_spec)
 
@@ -66,7 +66,7 @@ while j>0:
 	    'gmst0': 0,
 	    'Heff5': 1,
 	    'Heff8': 15,
-	    'e0': 0.1
+	    'e0': 0.01
 	    }
 	#calculating isco frequency
 
@@ -78,7 +78,7 @@ while j>0:
 
 
 	#check the desired frequency range
-	f = np.arange(4.,f_isco,2**-4)
+	f = np.arange(10.,f_isco,2**-4)
 
 
 
