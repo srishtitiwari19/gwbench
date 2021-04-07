@@ -41,6 +41,7 @@ err_Log_Mc = []
 err_H_eff5 = []
 err_H_eff8 = []
 chi_val =[]
+err_e0 =[]
 #input m1, m2 instead of Mc eta and then convert
 m1 = 25.
 m2 = 2.
@@ -142,6 +143,7 @@ while j>0:
 	err_H_eff5.append(net.errs["Heff5"])
 	err_H_eff8.append(net.errs["Heff8"])
 	chi_val.append(chi)
+	err_e0.append(net.errs["e0"])
 	
 	#print injection values of masses and spins
 	chi1,chi2 = inj_params["chi1z"],inj_params["chi2z"]
