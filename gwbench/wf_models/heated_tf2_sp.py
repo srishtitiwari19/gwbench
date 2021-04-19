@@ -26,14 +26,14 @@ sin = sp.sin
 log = sp.log
 PI = np.pi
 
-wf_symbs_string = 'f Mc eta chi1z chi2z DL tc phic iota Heff5 Heff8'
-f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8 = sp.symbols(wf_symbs_string, real=True)
+wf_symbs_string = 'f Mc eta chi1z chi2z DL tc phic iota Heff5 Heff8 e0'
+f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0 = sp.symbols(wf_symbs_string, real=True)
 
 #------from Anruadha--------
 # defining constants
 GammaE = 0.577215664901532
 
-def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8):
+def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     '''
     Mc ... in solar mass
     DL ... in mega parsec
@@ -56,10 +56,12 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8):
     v  = (PI*M*f)**(1./3.)
     flso = brs.f_isco(M)
     vlso = (PI*M*flso)**(1./3.)
+    f0 = 10.
+    fbyf0 = f/f0
     A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)
 
     # 3.5PN phasing (point particle limit)
-    p0 = 1.
+    p0 = 1. - (2355./1462.)*e0**2.*fbyf0**(-19./9.)
 
     p1 = 0
 
