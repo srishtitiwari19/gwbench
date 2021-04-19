@@ -40,8 +40,8 @@ net.set_wf_vars(wf_model_name=wf_model_name)
 err_Log_Mc = []
 err_H_eff5 = []
 err_H_eff8 = []
-chi_val =[]
-err_e0 =[]
+chi_val = []
+err_e_0 = []
 #input m1, m2 instead of Mc eta and then convert
 m1 = 25.
 m2 = 2.
@@ -85,7 +85,7 @@ while j>0:
 
 	#wf_other_var_dic = {'Heff5': 0, 'Heff8': 0}
 	# assign with respect to which parameters to take derivatives
-	deriv_symbs_string = 'Mc Heff5 Heff8'
+	deriv_symbs_string = 'Mc Heff5 Heff8 e0'
 
 	# assign which parameters to convert to cos or log versions
 	conv_cos = ('iota','dec')
@@ -139,11 +139,11 @@ while j>0:
 	# print the contents of the network objects
 	#net.print_network()
 	#print(net.errs)
-	#err_Log_Mc.append(net.errs["log_Mc"])
+	err_Log_Mc.append(net.errs["log_Mc"])
 	err_H_eff5.append(net.errs["Heff5"])
 	err_H_eff8.append(net.errs["Heff8"])
 	chi_val.append(chi)
-	err_e0.append(net.errs["e0"])
+	err_e_0.append(net.errs["e0"])
 	
 	#print injection values of masses and spins
 	chi1,chi2 = inj_params["chi1z"],inj_params["chi2z"]
@@ -159,6 +159,6 @@ while j>0:
 #----------------------------
 
 with open ("error_m1_{}_m2_{}.txt".format(m1, m2), "w") as f:
-	f.write("!chi\terr_H_eff5\terr_Heff8\n")
+	f.write("!chi\terr_H_eff5\terr_H_eff8\n")
 	for i in range(0,len(chi_val)):
 		f.write("{0}\t{1}\t{2}\n".format(chi_val[i], err_H_eff5[i], err_H_eff8[i]))
