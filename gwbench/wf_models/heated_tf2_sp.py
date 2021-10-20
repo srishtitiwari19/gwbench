@@ -61,7 +61,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)
 
     # 3.5PN phasing (point particle limit)
-    p0 = 1. - (2355./1462.)*e0**2.*fbyf0**(-19./9.)
+    p0 = (1. - (2355./1462.)*e0**2.*fbyf0**(-19./9.))
 
     p1 = 0
 
