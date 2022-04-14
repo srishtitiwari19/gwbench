@@ -54,6 +54,9 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8):
     v  = (PI*M*f)**(1./3.)
     flso = brs.f_isco(M)
     vlso = (PI*M*flso)**(1./3.)
+    f0 = 10.
+    v0 = (PI*M*f0)**(1./3.)
+    vByv0 = v/v0
     A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)
 
   # 3.5PN phasing (point particle limit)
@@ -116,7 +119,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8):
     #phase due to tidal heating
     #----------------------------------------------------
     psi_so1 = (1/6.)*(-56*eta - 73*np.sqrt(1 - 4*eta) + 73)*chi1z
-    psi_so2 = (1/6.)*(-56*eta - 73*np.sqrt(1 - 4*eta) + 73)*chi2z
+    psi_so2 = (1/6.)*(-56*eta + 73*np.sqrt(1 - 4*eta) + 73)*chi2z
     psi_so = psi_so1 + psi_so2
     con = (3./(128.*v**5*eta))
     term1 = -(10/9.)*(v**5)*Heff5*(3*np.log(v))
