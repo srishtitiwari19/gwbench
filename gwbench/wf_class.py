@@ -1,4 +1,4 @@
-# Copyright (C) 2020  Ssohrab Borhanian
+u# Copyright (C) 2020  Ssohrab Borhanian
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +29,10 @@ from gwbench.wf_models import heated_tf2_np
 from gwbench.wf_models import heated_tf2_sp
 from gwbench.wf_models import heated_tf2_ecc_np
 from gwbench.wf_models import heated_tf2_ecc_sp
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6e7d3ca (Adding files/directories for the case of eccentric phasing)
 
 class Waveform(object):
 
