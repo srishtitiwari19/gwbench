@@ -51,13 +51,36 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
 
     M = Mc/eta**(3./5.)
     delta = (1.-4.*eta)**0.5
+    ci = cos(iota)
+    si = sin(iota)
     v  = (PI*M*f)**(1./3.)
     flso = brs.f_isco(M)
     vlso = (PI*M*flso)**(1./3.)
-    f0 = 4.
+    f0 = f[0]
     v0 = (PI*M*f0)**(1./3.)
     vByv0 = v/v0
     A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)
+
+  # Sixth order eccentricity contributions in leading order GW amplitude: Plus polarization. We set the azimuthal angle beta as zero. 
+    hp1 =
+    hp2 = 
+    hp3 =
+    hp4 =
+    hp5 =
+    hp6 = 
+    hp7 =
+    hp8 = 
+	
+  # Sixth order eccentricity contributions in leading order GW amplitude: Cross polarization. We set the azimuthal angle beta as zero. 
+    hc1 =  3.j*ci*vByv0**(-19./6.)*e0. + ((-31363./1824.)*vByv0**(-19./2.) + (3323./608.)*vByv0**(-19./6.))*1j*ci*e0**3. + ((749695861./6653952.)*vByv0**(-95./6.) - (104219249./1108992.)*vByv0**(-19./2.) + (15994231./2217984.)*vByv0**(-19./6.))*1j*ci*e0**5.
+    hc2 = -4.j*ci + (277.j*ci/12.)*vByv0**(-19./3.)*e0**2. + ((-3265543./21888.)*vByv0**(-38./3.) + (920471./10944.)*vByv0**(-19./3.))*1j*ci*e0**4. + ((104238504751./99809280.)*vByv0**(-19.) - (10851399389./9980928.)*vByv0**(-38./3.) + (468070445./2495232.)*vByv0**(-19./3.))*1j*ci*e0**6.
+    hc3 = (-9.j*ci)*vByv0**(-19./6.)*e0 + ((40863./608.)*vByv0**(-19./2.) - (9969./608.)*vByv0**(-19./6.))*1j*ci*e0**3. + (-(1812254203./3696640.)*vByv0**(-95./6.) + (135787749./369664.)*vByv0**(-19./2.) - (15994231./739328.)*vByv0**(-19./6.))*1j*ci*e0**5.
+    hc4 = (-16.j*ci)*vByv0**(-19./3.)*e0**2. + ((2862./19.)*vByv0**(-38./3.)-(3323./57.)*vByv0**(-19./3.))*1j*ci*e0**4. + (-(643523447./519840.)*vByv0**(-19.) + (1585071./1444.)*vByv0**(-38./3.) - (1689785./12996.)*vByv0**(-19./3.))*1j*ci*e0**6.
+    hc5 = (-625.j*ci/24.)*vByv0**(-19./2.)*e0**3. + ((13023125./43776.)*vByv0**(-95./6.) - (2076875./14592.)*vByv0**(-19./2.))*1j*ci*e0**5.
+    hc6 = (-81.j*ci/2.)*vByv0**(-38./3.)*e0**4. + ((1656963./3040.)*vByv0**(-19.) - (89721./304.)*vByv0**(-38./3.))*1j*ci*e0**6.
+    hc7 = (-117649.j*ci/1920.)*vByv0**(-95./6.)*e0**5.
+    hc8 = (-4096.j*ci/45.)*vByv0**(-19.)*e0**6.
+
 
   # 3.5PN phasing (point particle limit)
     p0 = 1. 
