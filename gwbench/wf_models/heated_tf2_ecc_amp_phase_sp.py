@@ -53,6 +53,8 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
 
     M = Mc/eta**(3./5.)
     delta = (1.-4.*eta)**0.5
+    ci = cos(iota)
+    si = sin(iota)
     v  = (PI*M*f)**(1./3.)
     flso = brs.f_isco(M)
     vlso = (PI*M*flso)**(1./3.)
