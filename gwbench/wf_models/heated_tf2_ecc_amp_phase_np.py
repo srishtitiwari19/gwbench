@@ -23,6 +23,7 @@ from gwbench.basic_constants import time_fac, strain_fac
 cos = np.cos
 sin = np.sin
 log = np.log
+ustep = np.heaviside
 PI = np.pi
 
 wf_symbs_string = 'f Mc eta chi1z chi2z DL tc phic iota Heff5 Heff8 e0'
@@ -54,12 +55,20 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     ci = cos(iota)
     si = sin(iota)
     v  = (PI*M*f)**(1./3.)
+    v1 = (PI*M*2*f/1)**(1./3.)
+    v2 = (PI*M*2*f/2)**(1./3.)
+    v3 = (PI*M*2*f/3)**(1./3.)
+    v4 = (PI*M*2*f/4)**(1./3.)
+    v5 = (PI*M*2*f/5)**(1./3.)
+    v6 = (PI*M*2*f/6)**(1./3.)
+    v7 = (PI*M*2*f/7)**(1./3.)
+    v8 = (PI*M*2*f/8)**(1./3.)
     flso = brs.f_isco(M)
     vlso = (PI*M*flso)**(1./3.)
     f0 = f[0]
     v0 = (PI*M*f0)**(1./3.)
     vByv0 = v/v0
-    A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)
+    A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)  #Amplitude for the eccentric case
    # A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL) Amplitude for the circular case
 
   # Sixth order eccentricity contributions in leading order GW amplitude: Plus polarization. We set the azimuthal angle beta as zero. 
@@ -199,12 +208,19 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     #heated_phase = con*(term1 + term2 + term3)
     
     #Circular + eccentric phasing with Tidal Heating terms at 2.5, 3.5 & 4PN orders    
-    phase = 2*f*PI*tc - phic - PI/4. + (3./(128.*v**5*eta))*(p0 + p0ecc + v*(p1 + p1ecc) + v**2*(p2 + p2ecc) + v**3*(p3 + p3ecc) + v**4*(p4 + p4ecc) + v**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v**6*(p6 + p6L + p6ecc + p6Lecc) + v**7*(p7 + THterm2) + v**8*THterm3)
-  
+    phase1 = 2*f*PI*tc - 1*phic - PI/4. + (3./(128.*v1**5*eta))*(p0 + p0ecc + v1*(p1 + p1ecc) + v1**2*(p2 + p2ecc) + v1**3*(p3 + p3ecc) + v1**4*(p4 + p4ecc) + v1**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v1**6*(p6 + p6L + p6ecc + p6Lecc) + v1**7*(p7 + THterm2) + v1**8*THterm3)
+    phase2 = 2*f*PI*tc - 2*phic - PI/4. + (3./(128.*v2**5*eta))*(p0 + p0ecc + v2*(p1 + p1ecc) + v2**2*(p2 + p2ecc) + v2**3*(p3 + p3ecc) + v2**4*(p4 + p4ecc) + v2**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v2**6*(p6 + p6L + p6ecc + p6Lecc) + v2**7*(p7 + THterm2) + v2**8*THterm3)
+    phase3 = 2*f*PI*tc - 3*phic - PI/4. + (3./(128.*v3**5*eta))*(p0 + p0ecc + v3*(p1 + p1ecc) + v3**2*(p2 + p2ecc) + v3**3*(p3 + p3ecc) + v3**4*(p4 + p4ecc) + v3**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v3**6*(p6 + p6L + p6ecc + p6Lecc) + v3**7*(p7 + THterm2) + v3**8*THterm3)
+    phase4 = 2*f*PI*tc - 4*phic - PI/4. + (3./(128.*v4**5*eta))*(p0 + p0ecc + v4*(p1 + p1ecc) + v4**2*(p2 + p2ecc) + v4**3*(p3 + p3ecc) + v4**4*(p4 + p4ecc) + v4**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v4**6*(p6 + p6L + p6ecc + p6Lecc) + v4**7*(p7 + THterm2) + v4**8*THterm3)
+    phase5 = 2*f*PI*tc - 5*phic - PI/4. + (3./(128.*v5**5*eta))*(p0 + p0ecc + v5*(p1 + p1ecc) + v5**2*(p2 + p2ecc) + v5**3*(p3 + p3ecc) + v5**4*(p4 + p4ecc) + v5**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v5**6*(p6 + p6L + p6ecc + p6Lecc) + v5**7*(p7 + THterm2) + v5**8*THterm3)
+    phase6 = 2*f*PI*tc - 6*phic - PI/4. + (3./(128.*v6**5*eta))*(p0 + p0ecc + v6*(p1 + p1ecc) + v6**2*(p2 + p2ecc) + v6**3*(p3 + p3ecc) + v6**4*(p4 + p4ecc) + v6**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v6**6*(p6 + p6L + p6ecc + p6Lecc) + v6**7*(p7 + THterm2) + v6**8*THterm3)
+    phase7 = 2*f*PI*tc - 7*phic - PI/4. + (3./(128.*v7**5*eta))*(p0 + p0ecc + v7*(p1 + p1ecc) + v7**2*(p2 + p2ecc) + v7**3*(p3 + p3ecc) + v7**4*(p4 + p4ecc) + v7**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v7**6*(p6 + p6L + p6ecc + p6Lecc) + v7**7*(p7 + THterm2) + v7**8*THterm3)
+    phase8 = 2*f*PI*tc - 8*phic - PI/4. + (3./(128.*v8**5*eta))*(p0 + p0ecc + v8*(p1 + p1ecc) + v8**2*(p2 + p2ecc) + v8**3*(p3 + p3ecc) + v8**4*(p4 + p4ecc) + v8**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v8**6*(p6 + p6L + p6ecc + p6Lecc) + v8**7*(p7 + THterm2) + v8**8*THterm3)
+
     #phase += heated_phase
     
-    hp = A * (hp1 * (cos(phase1) + 1j*sin(phase1)) + hp2 * (cos(phase2) + 1j*sin(phase2)) + hp3 * (cos(phase3) + 1j*sin(phase3)) + hp4 * (cos(phase4) + 1j*sin(phase4)) + hp5 * (cos(phase5) + 1j*sin(phase5)) + hp6 * (cos(phase6) + 1j*sin(phase6)) + hp7 * (cos(phase7) + 1j*sin(phase7)) + hp8 * (cos(phase8) + 1j*sin(phase8)))	
-    hc = A * (hc1 * (cos(phase1) + 1j*sin(phase1)) + hc2 * (cos(phase2) + 1j*sin(phase2)) + hc3 * (cos(phase3) + 1j*sin(phase3)) + hc4 * (cos(phase4) + 1j*sin(phase4)) + hc5 * (cos(phase5) + 1j*sin(phase5)) + hc6 * (cos(phase6) + 1j*sin(phase6)) + hc7 * (cos(phase7) + 1j*sin(phase7)) + hc8 * (cos(phase8) + 1j*sin(phase8)))
+    hp = A * f**(-7./6.) * (hp1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hp2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hp3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hp4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hp5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hp6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hp7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hp8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))	 #Plus GW polarization for eccentric binaries 
+    hc = A * f**(-7./6.) * (hc1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hc2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hc3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hc4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hc5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hc6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hc7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hc8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))     #Cross GW polarization for eccentric binaries
 	
   #  hp = 0.5*(1+(cos(iota))**2)*A*f**(-7./6.)*(cos(phase) - 1j*sin(phase))    Plus GW polarization for circular binaries 
   #  hc = -1j*cos(iota)*A*f**(-7./6.)*(cos(phase) - 1j*sin(phase))             Cross GW polarization for circular binaries
