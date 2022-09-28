@@ -69,7 +69,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     v0 = (PI*M*f0)**(1./3.)
     vByv0 = v/v0
     A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)  #Amplitude for the eccentric case
-   # A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL) Amplitude for the circular case
+ 
 
   # Sixth order eccentricity contributions in leading order GW amplitude: Plus polarization. We set the azimuthal angle beta as zero. 
     hp1 = ((3./2.)*(1+ci**2.) + si**2.)*vByv0**(-19./6.)*e0 + (((-30299./3648.)*(1+ci**2.) - (9517./1824.)*si**2.)*vByv0**(-19./2.) + ((3323./1216.)*(1+ci**2.) + (3323./1824.)*si**2.)*vByv0**(-19./6.))*e0**3. + (((717415013./13307904.)*(1+ci**2.) + (220389695./6653952.)*si**2.)*vByv0**(-95./6.) + ((-100683577./2217984.)*(1+ci**2.) - (31624991./1108992.)*si**2.)*vByv0**(-19./2.) + ((15994231./4435968.)*(1+ci**2.) + (15994231./6653952.)*si**2.)*vByv0**(-19./6.))*e0**5.
@@ -191,22 +191,16 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
 	      + (211649317./191520.)*log(v)*vByv0**(-38./3.) + (558835855./2030112.)*(log(vByv0) - log(v))*vByv0**(-56./3.))*e0**4.) + ((-(248175681337./698664960.)*log(v)*vByv0**(-19./3.) + (1423526912698421./255362042880.)*(log(vByv0) - log(v))*vByv0**(-37./3.) \
               + (703310680391./87333120.)*log(v)*vByv0**(-38./3.) + (45970619802497./14348831616.)*(log(v) - log(vByv0))*vByv0**(-56./3.) - (5813865129161./815109120.)*log(v)*vByv0**(-19.) + (249956266625./139732992.)*(log(v) - log(vByv0))*vByv0**(-25.))*e0**6.)
 
-'''
-    #Circular + eccentric phasing    
-    phase = 2*f*PI*tc - phic - PI/4. + (3./(128.*v**5*eta))*(p0 + p0ecc + v*(p1 + p1ecc) + v**2*(p2 + p2ecc) + v**3*(p3 + p3ecc) + v**4*(p4 + p4ecc) + v**5*(p5 + p5L + p5ecc + p5Lecc) + v**6*(p6 + p6L + p6ecc + p6Lecc) + v**7*p7)
-'''  
+
     #phase due to tidal heating
     #----------------------------------------------------
     psi_so1 = (1/6.)*(-56*eta - 73*np.sqrt(1 - 4*eta) + 73)*chi1z
     psi_so2 = (1/6.)*(-56*eta + 73*np.sqrt(1 - 4*eta) + 73)*chi2z
     psi_so = psi_so1 + psi_so2
-    #con = (3./(128.*v**5*eta))
     THterm1 = -(10/9.)*(v**5)*Heff5*(3*np.log(v))
     THterm2 = -(5/168.)*(v**7)*Heff5*(952*eta + 995)
     THterm3 = (5/9.)*(v**8)*(3*np.log(v))*(-4*Heff8 + Heff5*psi_so)
-    
-    #heated_phase = con*(term1 + term2 + term3)
-    
+      
     #Circular + eccentric phasing with Tidal Heating terms at 2.5, 3.5 & 4PN orders    
     phase1 = 2*f*PI*tc - 1*phic - PI/4. + (3./(128.*v1**5*eta))*(p0 + p0ecc + v1*(p1 + p1ecc) + v1**2*(p2 + p2ecc) + v1**3*(p3 + p3ecc) + v1**4*(p4 + p4ecc) + v1**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v1**6*(p6 + p6L + p6ecc + p6Lecc) + v1**7*(p7 + THterm2) + v1**8*THterm3)
     phase2 = 2*f*PI*tc - 2*phic - PI/4. + (3./(128.*v2**5*eta))*(p0 + p0ecc + v2*(p1 + p1ecc) + v2**2*(p2 + p2ecc) + v2**3*(p3 + p3ecc) + v2**4*(p4 + p4ecc) + v2**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v2**6*(p6 + p6L + p6ecc + p6Lecc) + v2**7*(p7 + THterm2) + v2**8*THterm3)
@@ -217,12 +211,9 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     phase7 = 2*f*PI*tc - 7*phic - PI/4. + (3./(128.*v7**5*eta))*(p0 + p0ecc + v7*(p1 + p1ecc) + v7**2*(p2 + p2ecc) + v7**3*(p3 + p3ecc) + v7**4*(p4 + p4ecc) + v7**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v7**6*(p6 + p6L + p6ecc + p6Lecc) + v7**7*(p7 + THterm2) + v7**8*THterm3)
     phase8 = 2*f*PI*tc - 8*phic - PI/4. + (3./(128.*v8**5*eta))*(p0 + p0ecc + v8*(p1 + p1ecc) + v8**2*(p2 + p2ecc) + v8**3*(p3 + p3ecc) + v8**4*(p4 + p4ecc) + v8**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v8**6*(p6 + p6L + p6ecc + p6Lecc) + v8**7*(p7 + THterm2) + v8**8*THterm3)
 
-    #phase += heated_phase
-    
+   
     hp = A * f**(-7./6.) * (hp1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hp2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hp3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hp4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hp5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hp6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hp7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hp8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))	 #Plus GW polarization for eccentric binaries 
     hc = A * f**(-7./6.) * (hc1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hc2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hc3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hc4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hc5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hc6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hc7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hc8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))     #Cross GW polarization for eccentric binaries
 	
-  #  hp = 0.5*(1+(cos(iota))**2)*A*f**(-7./6.)*(cos(phase) - 1j*sin(phase))    Plus GW polarization for circular binaries 
-  #  hc = -1j*cos(iota)*A*f**(-7./6.)*(cos(phase) - 1j*sin(phase))             Cross GW polarization for circular binaries
-
+ 
     return hp, hc
