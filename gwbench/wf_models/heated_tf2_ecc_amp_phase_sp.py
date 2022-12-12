@@ -39,6 +39,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     Mc ... in solar mass
     DL ... in mega parsec
     '''
+    m1, m2 = brs.m1_m2_of_Mc_eta(Mc,eta)
     # convert to sec
     Mc = Mc * time_fac
     DL = DL * time_fac/strain_fac
@@ -65,7 +66,8 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     v6 = (PI*M*2*f/6)**(1./3.)
     v7 = (PI*M*2*f/7)**(1./3.)
     v8 = (PI*M*2*f/8)**(1./3.)
-    flso = brs.f_isco(M)
+   #flso = brs.f_isco(M)
+    flso = brs.f_isco_Msolar_KBH(m1,m2,chi1z,chi2z)
     vlso = (PI*M*flso)**(1./3.)
     f0 = f[0]
     v0 = (PI*M*f0)**(1./3.)
@@ -198,9 +200,9 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     psi_so1 = (1/6.)*(-56*eta - 73*np.sqrt(1 - 4*eta) + 73)*chi1z
     psi_so2 = (1/6.)*(-56*eta + 73*np.sqrt(1 - 4*eta) + 73)*chi2z
     psi_so = psi_so1 + psi_so2
-    THterm1 = -(10/9.)*(v**5)*Heff5*(3*np.log(v))
-    THterm2 = -(5/168.)*(v**7)*Heff5*(952*eta + 995)
-    THterm3 = (5/9.)*(v**8)*(3*np.log(v))*(-4*Heff8 + Heff5*psi_so)
+    THterm1 = -(10/9.)*Heff5*(3*np.log(v)) #*(v**5)
+    THterm2 = -(5/168.)*Heff5*(952*eta + 995)  #*(v**7)
+    THterm3 = (5/9.)*(3*np.log(v))*(-4*Heff8 + Heff5*psi_so) #*(v**8)
     
     
     #Circular + eccentric phasing with Tidal Heating terms at 2.5, 3.5 & 4PN orders    
