@@ -107,7 +107,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
 
     p5 = (38645.*PI/756. - 65.*PI*eta/9. - gamma)
 
-    p5L = (38645.*PI/756. - 65.*PI*eta/9. - gamma)*3*log(v)  # It should just be log(v) and not log(v/vlso)
+    p5L = (38645.*PI/756. - 65.*PI*eta/9. - gamma)*3*log(v/vlso)  # It should just be log(v) and not log(v/vlso)
 
     p6 = (11583231236531./4694215680. - 640./3.*PI**2 - 6848./21.*GammaE + eta*(-15737765635./3048192. + 2255./12.*PI**2) + eta*eta*76055./1728. - eta*eta*eta*127825./1296. \
          - (6848./21.)*log(4.) + PI*(2270.*delta*chi_a/3. + (2270./3. - 520.*eta)*chi_s) + (75515./144. - 8225.*eta/18.)*delta*chi_a*chi_s \
