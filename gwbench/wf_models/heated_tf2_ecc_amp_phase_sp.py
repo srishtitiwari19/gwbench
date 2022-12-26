@@ -69,7 +69,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
    #flso = brs.f_isco(M)
     flso = brs.f_isco_Msolar_KBH(m1,m2,chi1z,chi2z)
     vlso = (PI*M*flso)**(1./3.)
-    f0 = f[0]
+    f0 = 10. #f[0]
     v0 = (PI*M*f0)**(1./3.)
     vByv0 = v/v0
     A =((5./384.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)  #Amplitude for the eccentric case
@@ -85,7 +85,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     hp8 = (-2048./45.)*(1+ci**2.)*vByv0**(-19.)*e0**6.
 	
   # Sixth order eccentricity contributions in leading order GW amplitude: Cross polarization. We set the azimuthal angle beta as zero. 
-    hc1 =  3.j*ci*vByv0**(-19./6.)*e0. + ((-31363./1824.)*vByv0**(-19./2.) + (3323./608.)*vByv0**(-19./6.))*1j*ci*e0**3. + ((749695861./6653952.)*vByv0**(-95./6.) - (104219249./1108992.)*vByv0**(-19./2.) + (15994231./2217984.)*vByv0**(-19./6.))*1j*ci*e0**5.
+    hc1 =  3.j*ci*vByv0**(-19./6.)*e0 + ((-31363./1824.)*vByv0**(-19./2.) + (3323./608.)*vByv0**(-19./6.))*1j*ci*e0**3. + ((749695861./6653952.)*vByv0**(-95./6.) - (104219249./1108992.)*vByv0**(-19./2.) + (15994231./2217984.)*vByv0**(-19./6.))*1j*ci*e0**5.
     hc2 = -4.j*ci + (277.j*ci/12.)*vByv0**(-19./3.)*e0**2. + ((-3265543./21888.)*vByv0**(-38./3.) + (920471./10944.)*vByv0**(-19./3.))*1j*ci*e0**4. + ((104238504751./99809280.)*vByv0**(-19.) - (10851399389./9980928.)*vByv0**(-38./3.) + (468070445./2495232.)*vByv0**(-19./3.))*1j*ci*e0**6.
     hc3 = (-9.j*ci)*vByv0**(-19./6.)*e0 + ((40863./608.)*vByv0**(-19./2.) - (9969./608.)*vByv0**(-19./6.))*1j*ci*e0**3. + (-(1812254203./3696640.)*vByv0**(-95./6.) + (135787749./369664.)*vByv0**(-19./2.) - (15994231./739328.)*vByv0**(-19./6.))*1j*ci*e0**5.
     hc4 = (-16.j*ci)*vByv0**(-19./3.)*e0**2. + ((2862./19.)*vByv0**(-38./3.)-(3323./57.)*vByv0**(-19./3.))*1j*ci*e0**4. + (-(643523447./519840.)*vByv0**(-19.) + (1585071./1444.)*vByv0**(-38./3.) - (1689785./12996.)*vByv0**(-19./3.))*1j*ci*e0**6.
@@ -216,8 +216,8 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     phase8 = 2*f*PI*tc - 8*phic - PI/4. + (3./(128.*v8**5*eta))*(p0 + p0ecc + v8*(p1 + p1ecc) + v8**2*(p2 + p2ecc) + v8**3*(p3 + p3ecc) + v8**4*(p4 + p4ecc) + v8**5*(p5 + p5L + p5ecc + p5Lecc + THterm1) + v8**6*(p6 + p6L + p6ecc + p6Lecc) + v8**7*(p7 + THterm2) + v8**8*THterm3)
 
    
-    hp = A * f**(-7./6.) * (hp1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hp2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hp3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hp4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hp5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hp6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hp7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hp8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))	 #Plus GW polarization for eccentric binaries 
-    hc = A * f**(-7./6.) * (hc1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f) + hc2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f) + hc3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f) + hc4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f) + hc5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f) + hc6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f) + hc7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f) + hc8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f))     #Cross GW polarization for eccentric binaries
+    hp = A * f**(-7./6.) * (hp1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f, 1) + hp2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f, 1) + hp3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f, 1) + hp4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f, 1) + hp5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f, 1) + hp6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f, 1) + hp7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f, 1) + hp8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f, 1))	 #Plus GW polarization for eccentric binaries 
+    hc = A * f**(-7./6.) * (hc1 * (1/2)**(2./3.) * (cos(phase1) + 1j*sin(phase1)) * ustep(1*flso - 2*f, 1) + hc2 * (2/2)**(2./3.) * (cos(phase2) + 1j*sin(phase2)) * ustep(2*flso - 2*f, 1) + hc3 * (3/2)**(2./3.) * (cos(phase3) + 1j*sin(phase3)) * ustep(3*flso - 2*f, 1) + hc4 * (4/2)**(2./3.) * (cos(phase4) + 1j*sin(phase4)) * ustep(4*flso - 2*f, 1) + hc5 * (5/2)**(2./3.) * (cos(phase5) + 1j*sin(phase5)) * ustep(5*flso - 2*f, 1) + hc6 * (6/2)**(2./3.) * (cos(phase6) + 1j*sin(phase6)) * ustep(6*flso - 2*f, 1) + hc7 * (7/2)**(2./3.) * (cos(phase7) + 1j*sin(phase7)) * ustep(7*flso - 2*f, 1) + hc8 * (8/2)**(2./3.) * (cos(phase8) + 1j*sin(phase8)) * ustep(8*flso - 2*f, 1))     #Cross GW polarization for eccentric binaries
 	
 
     return hp, hc
