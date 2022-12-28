@@ -70,7 +70,7 @@ def hfpc(f, Mc, eta, chi1z, chi2z, DL, tc, phic, iota, Heff5, Heff8, e0):
     f0 = 10. #f[0]
     v0 = (PI*M*f0)**(1./3.)
     vByv0 = v/v0
-    A =((5./24.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)  #Amplitude for the eccentric case
+    A =((5./384.)**0.5/PI**(2./3.))*(Mc**(5./6.)/DL)  #Amplitude for the eccentric case
  
 
   # Sixth order eccentricity contributions in leading order GW amplitude: Plus polarization. We set the azimuthal angle beta as zero. 
